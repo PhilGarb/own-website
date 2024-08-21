@@ -1,9 +1,15 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
+import Layout from "@/layouts/default.astro";
 import formatDate from "@/utils/formatDate";
+import { localizePathname } from "@/utils/localizePathname";
+import { getPublishedLocalizedPosts } from "@/utils/getLocalizedPosts";
 
-const posts = (await getCollection("posts")).sort(function (first, second) {
+export async function getStaticPaths() {
+  return [{ params: { locale: "en" } }, { params: { locale: "de" } }];
+}
+
+const { posts, locale } = await getPublishedLocalizedPosts();
+const sortedPosts = posts.sort(function (first, second) {
   return second.data.publishedAt.getTime() - first.data.publishedAt.getTime();
 });
 ---
@@ -14,10 +20,10 @@ const posts = (await getCollection("posts")).sort(function (first, second) {
 
     <article class="flex flex-col gap-4">
       {
-        posts.map((post) => (
+        sortedPosts.map((post) => (
           <a
             class="group flex flex-col gap-2 border-t border-neutral-700 py-4 transition-all hover:text-neutral-100"
-            href={`/posts/${post.slug}`}
+            href={localizePathname(`/posts/${post.slug}`, locale)}
           >
             <div class="flex w-full items-center justify-between">
               <h2 class="text-lg">{post.data.title}</h2>

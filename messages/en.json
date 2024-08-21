@@ -1,0 +1,19 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "navigation_home": "Home",
+    "navigation_posts": "Posts",
+    "mail": "philipp.heinze@philtech.dev",
+    "mailto_cta": "Get in touch!",
+    "description": "I'm a *german frontend developer* with over *6 years* of web experience. I am working with *React, Typescript and Node.js*.",
+    "title": "Hi, I’m Philipp 👋",
+    "navigation_lang": "Deutsch 🇩🇪",
+    "bald_mad_duck_ripple": "See all posts",
+    "heroic_wild_antelope_snip": "Soon, stay connected 👀...",
+    "crazy_bald_opossum_reap": "Latest posts",
+    "front_nice_ostrich_jest": "Selected projects",
+    "elegant_stout_skunk_trust": "Email me at",
+    "sea_aloof_cow_praise": "or follow me via my social links.",
+    "sound_moving_tortoise_vent": "Signed NDA",
+    "salty_clear_lion_fond": "Selected projects ({count})",
+    "bold_dirty_flea_belong": "Get in touch"
+}

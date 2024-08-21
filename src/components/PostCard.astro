@@ -1,5 +1,9 @@
 ---
+import { languageTag } from "@/paraglide/runtime";
 import formatDate from "@/utils/formatDate";
+import { localizePathname } from "@/utils/localizePathname";
+
+const locale = languageTag();
 
 type Props = {
   title: string;
@@ -13,7 +17,7 @@ const { title, publishedAt, description, slug } = Astro.props;
 
 <a
   class="group flex max-w-sm cursor-pointer flex-col gap-2 rounded-md border border-neutral-700 p-4 transition-all duration-300 hover:-translate-y-2 hover:border-neutral-400"
-  href={`/posts/${slug}`}
+  href={localizePathname(`/posts/${slug}`, locale)}
 >
   <div
     class="flex w-full flex-col justify-between gap-2 md:flex-row md:items-center"

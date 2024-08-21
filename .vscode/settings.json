@@ -1,0 +1,11 @@
+{
+  "i18n-ally.localesPaths": [
+    "messages",
+    "src/paraglide/messages"
+  ],
+  "yaml.schemas": {
+    "https://www.artillery.io/schema.json": []
+  },
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "javascript.preferences.importModuleSpecifier": "shortest"
+}

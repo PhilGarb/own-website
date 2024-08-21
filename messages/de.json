@@ -1,0 +1,19 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "navigation_home": "Startseite",
+    "navigation_posts": "Posts",
+    "mail": "philipp.heinze@philtech.dev",
+    "mailto_cta": "Schreibe mir!",
+    "description": "Ich bin ein *deutscher Frontend-Entwickler* mit über *6 Jahren* Web-Erfahrung. Ich arbeite mit *React, Typescript und Node.js*.",
+    "title": "Hallo, ich bin Philipp 👋",
+    "navigation_lang": "English 🇬🇧",
+    "bald_mad_duck_ripple": "Alle Posts anzeigen",
+    "heroic_wild_antelope_snip": "Bald gibt es den ersten Post 👀...",
+    "crazy_bald_opossum_reap": "Neueste Posts",
+    "front_nice_ostrich_jest": "Augewählte Projekte",
+    "elegant_stout_skunk_trust": "Schicken Sie mir eine E-Mail an",
+    "sea_aloof_cow_praise": "oder folgen mir über meine sozialen Links.",
+    "sound_moving_tortoise_vent": "NDA",
+    "salty_clear_lion_fond": "Augewählte Projekte ({count})",
+    "bold_dirty_flea_belong": "Kontakt aufnehmen"
+}

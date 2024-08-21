@@ -1,0 +1,123 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/default.astro";
+import SocialLinks from "@/components/SocialLinks.astro";
+import PostCard from "@/components/PostCard.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Link from "@/components/shared/Link.astro";
+import convertAsteriskToStrongTag from "@/utils/convertAsteriskToStrongTag";
+import projects from "@/data/projects";
+import { profilePicture } from "@/data/profilePicture";
+import * as m from "@/paraglide/messages.js";
+import { getPublishedLocalizedPosts } from "@/utils/getLocalizedPosts";
+import { localizePathname } from "@/utils/localizePathname";
+import { languageTag } from "@/paraglide/runtime";
+
+export async function getStaticPaths() {
+  return [{ params: { locale: "en" } }, { params: { locale: "de" } }];
+}
+
+const locale = languageTag();
+const { posts } = await getPublishedLocalizedPosts();
+const sortedPosts = posts.sort(function (first, second) {
+  return second.data.publishedAt.getTime() - first.data.publishedAt.getTime();
+});
+---
+
+<Layout>
+  <main class="flex flex-col gap-20">
+    <article
+      class="flex flex-col justify-start gap-8 md:flex-row-reverse md:justify-between md:gap-12"
+    >
+      <div
+        class:list={{
+          [`fixed z-0 h-[134px] w-[134px] lg:w-[300px] lg:h-[300px] rounded-full bg-red-500 blur-[250px] opacity-50`]: true,
+        }}
+      >
+      </div>
+      {
+        profilePicture && (
+          <Image
+            src={profilePicture}
+            class="w-1/4 rounded-full md:w-1/3"
+            alt="Your Profile"
+            width="200"
+            height="200"
+          />
+        )
+      }
+
+      <div class="flex flex-col gap-8">
+        <h1 class="text-3xl text-neutral-100">
+          {m.title()}
+        </h1>
+
+        <h2
+          class="w-auto max-w-[60ch] leading-6"
+          set:html={convertAsteriskToStrongTag(m.description())}
+        />
+
+        <SocialLinks />
+      </div>
+    </article>
+
+    <article class="flex flex-col gap-8">
+      <header class="flex w-full flex-row justify-between gap-2">
+        <h3 class="text-lg text-neutral-100">{m.crazy_bald_opossum_reap()}</h3>
+        <Link
+          href={localizePathname("/posts", locale)}
+          label={m.bald_mad_duck_ripple()}
+          isUnderline
+          target="_self"
+        />
+      </header>
+      {sortedPosts.length === 0 && <p>{m.heroic_wild_antelope_snip()}</p>}
+      <section class="flex flex-col gap-4 md:flex-row md:flex-wrap">
+        {
+          sortedPosts.length !== 0 &&
+            sortedPosts
+              .slice(0, 2)
+              .map((post) => (
+                <PostCard
+                  publishedAt={post.data.publishedAt}
+                  title={post.data.title}
+                  description={post.data.description}
+                  slug={post.slug}
+                />
+              ))
+        }
+      </section>
+    </article>
+
+    <article class="flex flex-col gap-8">
+      <header class="flex w-full flex-row justify-between gap-2">
+        <h3 class="text-lg text-neutral-100">
+          {m.salty_clear_lion_fond({ count: projects.length })}
+        </h3>
+      </header>
+      <section class="flex flex-col gap-4">
+        {
+          projects.length !== 0 &&
+            projects.map((project) => <ProjectCard {...project} />)
+        }
+      </section>
+    </article>
+
+    <article class="flex flex-col gap-8">
+      <header class="flex w-full flex-row justify-between gap-2">
+        <h3 class="text-lg text-neutral-100">{m.bold_dirty_flea_belong()}</h3>
+      </header>
+      <p>
+        {m.elegant_stout_skunk_trust()}
+        <Link
+          href={`mailto:${m.mail()}`}
+          label={m.mail()}
+          class="text-neutral-300"
+        />
+        {m.sea_aloof_cow_praise()}
+      </p>
+
+      <SocialLinks />
+    </article>
+  </main>
+</Layout>

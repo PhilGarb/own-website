@@ -1,31 +1,30 @@
 export type Project = {
   title: string;
   techs: string[];
-  link: string;
-  isComingSoon?: boolean;
+  link?: string;
+  nda?: boolean;
 };
 
 const projects: Project[] = [
   {
-    title: "Puppetfactory",
-    techs: ["Next.js", "TypeScript"],
-    link: "https://puppetfactory.app/",
+    title: "Mioto",
+    techs: ["Next.js", "TypeScript", "Node.js", "Tailwind CSS"],
+    link: "https://mioto.app/",
   },
   {
-    title: "Script to generate Next.js project",
-    techs: ["Shell"],
-    link: "https://github.com/MaeWolff/create-nextjs-app-bash-script",
+    title: "Design System for corporate tech team",
+    techs: ["React", "TypeScript", "Storybook", "Tailwind CSS"],
+    nda: true,
   },
   {
-    title: "Dictionary App",
-    techs: ["Next.js", "react-query", "zod"],
-    link: "https://github.com/MaeWolff/dictionary-app",
+    title: "Compliance Checking Tool",
+    techs: ["React", "TypeScript"],
+    nda: true,
   },
   {
-    title: "Portfolio / Template",
-    techs: ["Astro", "TypeScript"],
-    link: "https://github.com/MaeWolff/astro-portfolio-template",
-    isComingSoon: true,
+    title: "Vacation Home Booking Website",
+    techs: ["Gatsby", "JavaScript", "GraphQL", "Tailwind CSS", "Stripe"],
+    link: "https://ferienwohnung-vogtland.com",
   },
 ];
 

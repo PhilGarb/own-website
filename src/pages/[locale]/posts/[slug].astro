@@ -1,0 +1,46 @@
+---
+import { type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/default.astro";
+import formatDate from "@/utils/formatDate";
+import { getPublishedLocalizedPosts } from "@/utils/getLocalizedPosts";
+
+export async function getStaticPaths() {
+  const { posts: dePosts } = await getPublishedLocalizedPosts("de");
+  const { posts: enPosts } = await getPublishedLocalizedPosts("en");
+
+  return [
+    ...dePosts.map((post) => {
+      return {
+        params: { locale: "de", slug: post.slug },
+        props: { post },
+      };
+    }),
+    ...enPosts.map((post) => {
+      return {
+        params: { locale: "en", slug: post.slug },
+        props: { post },
+      };
+    }),
+  ];
+}
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <main class="post mx-auto flex w-full max-w-prose flex-col gap-4">
+    <header role="presentation">
+      <h1 class="text-md">
+        {post.data.title} - {formatDate(post.data.publishedAt)}
+      </h1>
+      <p class="italic">{post.data.description}</p>
+    </header>
+
+    <Content />
+  </main>
+</Layout>

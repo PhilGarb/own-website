@@ -1,34 +1,46 @@
 ---
-import removeTrailingSlash from "@/utils/removeTrailingSlash";
-import presentation from "@/data/presentation";
+import { languageTag } from "@/paraglide/runtime";
+import * as m from "@/paraglide/messages.js";
+import { localizePathname, unlocalizePathname } from "@/utils/localizePathname";
 
-const pathname = removeTrailingSlash(Astro.url.pathname);
+const pathname = unlocalizePathname(Astro.url.pathname);
+const locale = languageTag();
 ---
 
 <header class="z-40 flex w-full flex-col gap-2 md:flex-row md:justify-between">
-  <a href={`mailto:${presentation.mail}`} class="hover:text-neutral-100"
-    >{presentation.mail}</a
+  <a href={`mailto:${m.mail()}`} class="hover:text-neutral-100"
+    >{m.mailto_cta()}</a
   >
 
   <nav role="navigation">
-    <ul role="list" class="flex flex-row gap-2">
+    <ul role="list" class="flex flex-row gap-8">
+      <div class="flex flex-row gap-2">
+        <li>
+          <a
+            href={localizePathname("/", locale)}
+            class:list={{
+              ["hover:text-neutral-100"]: true,
+              ["text-neutral-100"]: pathname === "/",
+            }}>{m.navigation_home()}</a
+          >
+        </li>
+        <li>/</li>
+        <li>
+          <a
+            href={localizePathname("/posts", locale)}
+            class:list={{
+              ["hover:text-neutral-100"]: true,
+              ["text-neutral-100"]: pathname === "/posts",
+            }}>{m.navigation_posts()}</a
+          >
+        </li>
+      </div>
       <li>
         <a
-          href="/"
+          href={locale === "en" ? `/de${pathname}` : `/en${pathname}`}
           class:list={{
             ["hover:text-neutral-100"]: true,
-            ["text-neutral-100"]: pathname === "/",
-          }}>Home</a
-        >
-      </li>
-      <li>/</li>
-      <li>
-        <a
-          href="/posts"
-          class:list={{
-            ["hover:text-neutral-100"]: true,
-            ["text-neutral-100"]: pathname === "/posts",
-          }}>Posts</a
+          }}>{m.navigation_lang()}</a
         >
       </li>
     </ul>
